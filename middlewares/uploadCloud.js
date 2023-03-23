@@ -25,9 +25,9 @@ const multerConfigAvatar = new CloudinaryStorage({
       transformation: [
         {
           height: USER_AVATAR_PARAMS.dimensions.height,
-          //height: 103,
+
           width: USER_AVATAR_PARAMS.dimensions.width,
-          //width: 103,
+
           crop: 'fill',
         },
       ],

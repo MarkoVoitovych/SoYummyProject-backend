@@ -1,34 +1,23 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const { User } = require("../models");
-const {
-  HttpError,
-} = require("../routes/errors/HttpErrors");
+const { User } = require('../models');
+const { HttpError } = require('../routes/errors/HttpErrors');
 
 const { SECRET_KEY } = process.env;
 
 const auth = async (req, res, next) => {
-  const { authorization = "" } = req.headers; // = "" if headers doesn't contain authorization
-  const [bearer, accessToken] =
-    authorization.split(" ");
-try {
-
-  if (bearer !== "Bearer" || !accessToken) {
-    throw HttpError(401);
-  }
-    const { id } = jwt.verify(
-      accessToken,
-      SECRET_KEY
-    );
-    const user = await User.findById(id);
-    if (
-      !user ||
-      !user.accessToken ||
-      user.accessToken !== accessToken
-    ) {
-      next(HttpError(401, "Not authorized"));
+  const { authorization = '' } = req.headers;
+  const [bearer, accessToken] = authorization.split(' ');
+  try {
+    if (bearer !== 'Bearer' || !accessToken) {
+      throw HttpError(401);
     }
-    req.user = user; // writting user data to req to send it futher
+    const { id } = jwt.verify(accessToken, SECRET_KEY);
+    const user = await User.findById(id);
+    if (!user || !user.accessToken || user.accessToken !== accessToken) {
+      next(HttpError(401, 'Not authorized'));
+    }
+    req.user = user;
     next();
   } catch (error) {
     next(HttpError(401, error.message));

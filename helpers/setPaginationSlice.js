@@ -1,17 +1,17 @@
-const setPaginationSlice = (page, per_page, arrLength) => {
-    if (per_page && arrLength){
-      page = parseInt(page);
-      per_page = parseInt(per_page);
+const setPaginationSlice = (page, limit, arrLength) => {
+  if (limit && arrLength) {
+    page = parseInt(page);
+    limit = parseInt(limit);
 
-      if ( !isNaN(page) && page >=0 && !isNaN(per_page) && per_page >0 ){
-        const start = ( page - 1 ) * per_page;
-        if ( start >= arrLength ) return null;
-        
-        const end = start + per_page;
-        return { start, end }
-      }
+    if (!isNaN(page) && page >= 0 && !isNaN(limit) && limit > 0) {
+      const start = (page - 1) * limit;
+      if (start >= arrLength) return null;
+
+      const end = start + limit;
+      return { start, end };
     }
-    return null;
   }
+  return null;
+};
 
-  module.exports = setPaginationSlice;
+module.exports = setPaginationSlice;
