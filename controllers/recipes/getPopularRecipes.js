@@ -1,5 +1,5 @@
 const { PopularMeals } = require('../../models/popularMeals');
-const { popularRecipesLimit } = require('../../config/defaults');
+const { POPULAR_RECIPES_LIMIT } = require('../../config/defaults');
 
 const getPopularRecipes = async (req, res) => {
   const data = await PopularMeals.find(
@@ -10,7 +10,7 @@ const getPopularRecipes = async (req, res) => {
     '-_id -users'
   )
     .sort({ users: 1 })
-    .limit(popularRecipesLimit);
+    .limit(POPULAR_RECIPES_LIMIT);
 
   res.json({ meals: data });
 };

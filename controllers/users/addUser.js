@@ -2,13 +2,13 @@ const bcrypt = require('bcrypt');
 
 const { User } = require('../../models');
 
-const { DEFAULT_AVATAR_iMG_URL } = require('../../config/defaults');
+const { DEFAULT_AVATAR_IMG_URL } = require('../../config/defaults');
 
 const { HttpError } = require('../../routes/errors/HttpErrors');
 
 const addUser = async (req, res) => {
   const { name, email, password } = req.body;
-  const avatar = req.file?.path || DEFAULT_AVATAR_iMG_URL;
+  const avatar = req.file?.path || DEFAULT_AVATAR_IMG_URL;
 
   const user = await User.findOne({ email });
 

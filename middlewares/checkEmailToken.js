@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = process.env;
+const { JWT_ACCESS_SECRET } = process.env;
 
 const { User } = require('../models');
 const { HttpError } = require('../routes/errors/HttpErrors');
@@ -11,7 +11,7 @@ const checkEmailToken = async (req, res, next) => {
     return null;
   }
   try {
-    const { _id, email } = jwt.verify(token, SECRET_KEY);
+    const { _id, email } = jwt.verify(token, JWT_ACCESS_SECRET);
 
     const user = await User.findOne({
       _id,

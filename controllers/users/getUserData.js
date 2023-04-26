@@ -13,7 +13,6 @@ const getUserData = async (req, res) => {
       name: user.name,
       email: user.email,
       avatarURL: user.avatarURL,
-      // achievements: user.achievements,
     },
   });
 };

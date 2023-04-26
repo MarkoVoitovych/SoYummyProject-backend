@@ -6,7 +6,7 @@ const { User } = require('../../models/');
 
 const { HttpError } = require('../../routes/errors/HttpErrors');
 
-const { SECRET_KEY } = process.env;
+const { JWT_ACCESS_SECRET } = process.env;
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -25,7 +25,11 @@ const loginUser = async (req, res) => {
     id: user._id,
   };
 
-  const accessToken = setToken(payload, SECRET_KEY, accessTokenExpiresIn);
+  const accessToken = setToken(
+    payload,
+    JWT_ACCESS_SECRET,
+    accessTokenExpiresIn
+  );
   await User.findByIdAndUpdate(user._id, {
     accessToken,
   });

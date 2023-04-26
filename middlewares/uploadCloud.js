@@ -19,7 +19,7 @@ const multerConfigAvatar = new CloudinaryStorage({
   params: (req, file) => {
     const avatarName = `${req.user._id}_avatar`;
     return {
-      folder: 'assets/avatars',
+      folder: 'soyummy/assets/avatars',
       allowed_formats: USER_AVATAR_PARAMS.acceptableFileTypes,
       public_id: avatarName,
       transformation: [
@@ -43,7 +43,7 @@ const multerConfiRecipe = new CloudinaryStorage({
     const imgID = nanoid(5);
     const recipeName = `${_id}_${imgID}_recipe`;
     return {
-      folder: 'assets/own_recipes_photos',
+      folder: 'soyummy/assets/own_recipes_photos',
       allowed_formats: USER_RECIPE_PIC_PARAMS.acceptableFileTypes,
       public_id: recipeName,
       transformation: [

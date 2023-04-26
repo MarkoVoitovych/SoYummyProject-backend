@@ -1,7 +1,7 @@
 const { PopularMeals } = require('../../models/popularMeals');
 const { fetchRecipeById } = require('../../services');
 const { Recipe } = require('../../models/recipes');
-const { themealdp_API_ID_LENGTH } = require('../../config/defaults');
+const { THEMEALDP_API_ID_LENGTH } = require('../../config/defaults');
 
 exports.addFavorite = async (req, res) => {
   const { idMeal: idRecipe } = req.body;
@@ -12,7 +12,7 @@ exports.addFavorite = async (req, res) => {
     { $addToSet: { users: _id } }
   );
 
-  if (idRecipe.toString().length < themealdp_API_ID_LENGTH) {
+  if (idRecipe.toString().length < THEMEALDP_API_ID_LENGTH) {
     const { meals } = await fetchRecipeById(idRecipe);
 
     const { idMeal, strMeal, strInstructions, strMealThumb } = meals[0];

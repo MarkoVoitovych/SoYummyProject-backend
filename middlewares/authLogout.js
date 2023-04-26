@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 const { HttpError } = require('../routes/errors/HttpErrors');
 
-const { SECRET_KEY } = process.env;
+const { JWT_ACCESS_SECRET } = process.env;
 
 const authLogout = async (req, res, next) => {
   const { authorization = '' } = req.headers;
@@ -12,7 +12,7 @@ const authLogout = async (req, res, next) => {
     next(HttpError(401, 'Not authorized'));
   }
   try {
-    const { id } = jwt.verify(accessToken, SECRET_KEY);
+    const { id } = jwt.verify(accessToken, JWT_ACCESS_SECRET);
     const user = await User.findById(id);
     if (!user || !user.accessToken || user.accessToken !== accessToken) {
       next(HttpError(401, 'Not authorized'));

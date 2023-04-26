@@ -1,11 +1,7 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const setToken = (
-  payload,
-  SECRET_KEY,
-  expiresIn
-) => {
-  return jwt.sign(payload, SECRET_KEY, {
+const setToken = (payload, JWT_ACCESS_SECRET, expiresIn) => {
+  return jwt.sign(payload, JWT_ACCESS_SECRET, {
     expiresIn,
   });
 };
