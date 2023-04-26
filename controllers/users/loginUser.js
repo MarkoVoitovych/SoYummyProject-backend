@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt');
+
 const { setToken } = require('../../helpers');
 const { accessTokenExpiresIn } = require('../../config/defaults');
-
 const { User } = require('../../models/');
-
 const { HttpError } = require('../../routes/errors/HttpErrors');
 
 const { JWT_ACCESS_SECRET } = process.env;

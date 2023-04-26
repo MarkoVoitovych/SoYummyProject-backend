@@ -12,13 +12,13 @@ const recipesRouter = require('./routes/api/recipes');
 const ownRecipesRouter = require('./routes/api/ownRecipes');
 const favoriteRouter = require('./routes/api/favorite');
 const shoppingListRouter = require('./routes/api/shoppingList');
-
+const corsOptions = require('./config/corsOptions');
 const app = express();
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
